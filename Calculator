@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Calculator</title>
+ <style>
+   .container{
+  max-width:400px;
+  margin:10vh auto 0 auto;
+   box-shadow: 0px 0px 43px 17px rgba(153,153,153,1);
+}
+#display{
+  text-align:right;
+  height:70px;
+  line-height:70px;
+  padding:16px 8px;
+  font: size 25px;;
+
+}
+.buttons{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.btn{
+  border:0.5px solid #999;
+  line-height:100px;
+  text-align:center;
+  font-size:25px;
+  cursor:pointer;
+  transition:0.5s ease-in-out;
+
+}
+#equal{
+      background-color: rgb(85,85,255);
+color: white;;
+}
+.btn:hover{
+  background-color:#323320;
+  color:white;
+}
+ </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="display"></div>
+    <div class="buttons">
+      <div class="btn" onclick="clearxyz()">C</div>
+      <div class="btn" onclick="clickingxyz('/')">/</div>
+      <div class="btn" onclick="clickingxyz('')"></div>
+      <div class="btn" onclick="backxyz()">&larr;</div>
+
+      <div class="btn" onclick="clickingxyz('7')">7</div>
+      <div class="btn" onclick="clickingxyz('8')">8</div>
+      <div class="btn" onclick="clickingxyz('9')">9</div>
+      <div class="btn" onclick="clickingxyz('-')">-</div>
+
+      <div class="btn" onclick="clickingxyz('4')">4</div>
+      <div class="btn" onclick="clickingxyz('5')">5</div>
+      <div class="btn" onclick="clickingxyz('6')">6</div>
+      <div class="btn" onclick="clickingxyz('+')">+</div>
+
+      <div class="btn" onclick="clickingxyz('1')">1</div>
+      <div class="btn" onclick="clickingxyz('2')">2</div>
+      <div class="btn" onclick="clickingxyz('3')">3</div>
+      <div class="btn" onclick="clickingxyz('.')">.</div>
+
+      <div class="btn" onclick="clickingxyz('(')">(</div>
+      <div class="btn" onclick="clickingxyz('0')">0</div>
+      <div class="btn" onclick="clickingxyz(')')">)</div>
+      <div class="btn" id="equal" onclick="evalxyz()">=</div>
+
+
+
+
+
+    </div>
+  </div>
+  <script>
+    let displayxyz = document.getElementById("display");
+let buttonsxyz = document.getElementsByClassName("btn");
+
+console.log(buttonsxyz);
+
+function isOpxyz(opxyz){
+  if(opxyz==="+" || opxyz === "-" || opxyz==="/" || opxyz==="*"){
+    return true;
+  }
+  return false;
+
+}
+
+function clickingxyz(clickedxyz){
+  if(displayxyz.innerText===""){
+    if(clickedxyz!='0'){
+      displayxyz.innerText = displayxyz.innerText+clickedxyz;
+    }
+  }
+  else{
+    // checking for 2 operators to not come together
+    if(isOpxyz(clickedxyz) && isOpxyz(displayxyz.innerText[displayxyz.innerText.length-1])){
+      displayxyz.innerText = displayxyz.innerText.slice(0, -1);
+    }
+      displayxyz.innerText = displayxyz.innerText+clickedxyz;
+
+  }
+  }
+
+function evalxyz(){
+  try{
+    displayxyz.innerText = eval(displayxyz.innerText);
+  }
+  catch(err){
+    displayxyz.innerText = "Error";
+  }
+}
+function clearxyz(){
+  displayxyz.innerText = "";
+}
+
+function backxyz(){
+  displayxyz.innerText = displayxyz.innerText.slice(0, -1);
+}
+  </script>
+</body>
+
+</html>
